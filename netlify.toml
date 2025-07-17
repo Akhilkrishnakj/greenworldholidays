@@ -7,7 +7,7 @@ redirects = []
 [functions."*"]
 
 [build]
-base = "Downloads/greenworld/project"
+base = "Downloads/New Green World/project"
 publish = "dist"
 command = "npm run build"
 
