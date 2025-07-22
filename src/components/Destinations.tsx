@@ -13,7 +13,7 @@ const Destinations = () => {
       id: 1,
       name: 'Munnar-Hill Station',
       district: 'Idukki',
-      image: '/munnar img.jpg',
+      image: '/munnar new .jpg',
       rating: 4.9,
       description: "Explore Munnar's breathtaking tea-covered hills, misty mountains, serene valleys, winding roads, and charming plantation villages nestled in nature."
     },
@@ -21,7 +21,7 @@ const Destinations = () => {
       id: 2,
       name: 'Alappuzha-Backwaters &Houseboat',
       district: 'Alappuzha',
-      image: '/Alappuzha-Backwaters & Houseboat.jpg',
+      image: '/houseboat.jpg',
       rating: 4.8,
       description: 'Cruise through the serene backwaters of Alleppey and experience the charm of traditional houseboats and lush green landscapes.'
     },
@@ -53,15 +53,15 @@ const Destinations = () => {
       id: 6,
       name: 'Kovalam-Beach Paradise',
       district: 'Thiruvananthapuram',
-      image: '/kovala beach.jpg',
+      image: '/kovalam.jpg',
       rating: 4.8,
       description: 'Relax on the golden sands of Kovalam Beach, enjoy swaying palm-lined shores, thrilling water sports, scenic sunsets, and rejuvenating Ayurvedic retreats'
     },
     {
       id: 7,
-      name: 'Kanyakumari - Land’s End',
+      name: 'Kanyakumari ',
       district: 'Kanyakumari',
-      image: '/kovala beach.jpg', // Use Kovalam beach as a placeholder if no Kanyakumari image
+      image: '/kanyakumari.jpeg', // Use Kovalam beach as a placeholder if no Kanyakumari image
       rating: 4.8,
       description: 'Marvel at the confluence of three seas, iconic Vivekananda Rock, sunrise and sunset views, and the southernmost tip of India.'
     },
@@ -77,9 +77,25 @@ const Destinations = () => {
       id: 9,
       name: 'Wayanad - Green Paradise',
       district: 'Wayanad',
-      image: '/vagamon.jpg', // Use vagamon as a placeholder if no Wayanad image
+      image: '/wayanad.jpg', // Use vagamon as a placeholder if no Wayanad image
       rating: 4.9,
       description: 'Discover misty mountains, lush forests, wildlife sanctuaries, waterfalls, and the cool climate of Wayanad.'
+    },
+    {
+      id: 11,
+      name: 'Kumarakom',
+      district: 'Kottayam',
+      image: '/Alappuzha-Backwaters & Houseboat.jpg', // Placeholder, update if Kumarakom image is available
+      rating: 4.7,
+      description: 'Unwind in the tranquil backwaters of Kumarakom, famous for its bird sanctuary, houseboat cruises, and lush green landscapes.'
+    },
+    {
+      id: 12,
+      name: 'Vagamon',
+      district: 'Idukki',
+      image: '/vagamon.jpg',
+      rating: 4.9,
+      description: 'Escape to the rolling meadows, pine forests, and misty hills of Vagamon—a serene hill station perfect for nature lovers and adventure seekers.'
     },
   ];
 
