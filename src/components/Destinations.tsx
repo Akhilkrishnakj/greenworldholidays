@@ -1,4 +1,3 @@
-import React from 'react';
 import { MapPin, Star, ArrowRight } from 'lucide-react';
 
 const handleLearnMore = (destinationName: string) => {
@@ -113,7 +112,7 @@ const Destinations = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {destinations.map((destination) => (
-            <div key={destination.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:shadow-[0_0_32px_8px_rgba(16,185,129,0.3)] transition-all duration-300 hover:transform hover:-translate-y-2">
+            <div key={destination.id} className="bg-white rounded-xl shadow-lg overflow-hidden  hover:shadow-[0_0_32px_8px_rgba(16,185,129,0.3)] transition-all duration-300 hover:transform hover:-translate-y-2">
               <div className="relative h-64 overflow-hidden">
                 <img 
                   src={destination.image} 
