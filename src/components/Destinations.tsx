@@ -1,3 +1,4 @@
+import  { useState, useEffect } from 'react';
 import { MapPin, Star, ArrowRight } from 'lucide-react';
 
 const handleLearnMore = (destinationName: string) => {
@@ -7,12 +8,26 @@ const handleLearnMore = (destinationName: string) => {
 };
 
 const Destinations = () => {
+  const [selected, setSelected] = useState<null | typeof destinations[0]>(null);
+
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (selected) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [selected]);
+
   const destinations = [
     {
       id: 1,
       name: 'Munnar-Hill Station',
       district: 'Idukki',
-      image: '/munnar new .jpg',
+      image: '/munnar img.jpg',
       rating: 4.9,
       description: "Explore Munnar's breathtaking tea-covered hills, misty mountains, serene valleys, winding roads, and charming plantation villages nestled in nature."
     },
@@ -20,7 +35,7 @@ const Destinations = () => {
       id: 2,
       name: 'Alappuzha-Backwaters &Houseboat',
       district: 'Alappuzha',
-      image: '/houseboat.jpg',
+      image: '/Alappuzha-Backwaters & Houseboat.jpg',
       rating: 4.8,
       description: 'Cruise through the serene backwaters of Alleppey and experience the charm of traditional houseboats and lush green landscapes.'
     },
@@ -52,15 +67,15 @@ const Destinations = () => {
       id: 6,
       name: 'Kovalam-Beach Paradise',
       district: 'Thiruvananthapuram',
-      image: '/kovalam.jpg',
+      image: '/kovala beach.jpg',
       rating: 4.8,
       description: 'Relax on the golden sands of Kovalam Beach, enjoy swaying palm-lined shores, thrilling water sports, scenic sunsets, and rejuvenating Ayurvedic retreats'
     },
     {
       id: 7,
-      name: 'Kanyakumari ',
+      name: 'Kanyakumari - Land’s End',
       district: 'Kanyakumari',
-      image: '/kanyakumari.jpeg', // Use Kovalam beach as a placeholder if no Kanyakumari image
+      image: '/kovala beach.jpg', // Use Kovalam beach as a placeholder if no Kanyakumari image
       rating: 4.8,
       description: 'Marvel at the confluence of three seas, iconic Vivekananda Rock, sunrise and sunset views, and the southernmost tip of India.'
     },
@@ -76,9 +91,17 @@ const Destinations = () => {
       id: 9,
       name: 'Wayanad - Green Paradise',
       district: 'Wayanad',
-      image: '/wayanad.jpg', // Use vagamon as a placeholder if no Wayanad image
+      image: '/vagamon.jpg', // Use vagamon as a placeholder if no Wayanad image
       rating: 4.9,
       description: 'Discover misty mountains, lush forests, wildlife sanctuaries, waterfalls, and the cool climate of Wayanad.'
+    },
+    {
+      id: 10,
+      name: 'Bekal Fort (Bakel Kotta)',
+      district: 'Kasaragod',
+      image: '/fort kochi.webp', // Placeholder, update if Bekal Fort image is available
+      rating: 4.8,
+      description: 'Step into history at Bekal Fort, Kerala’s largest and best-preserved fort, offering panoramic views of the Arabian Sea and lush surroundings.'
     },
     {
       id: 11,
@@ -112,7 +135,7 @@ const Destinations = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {destinations.map((destination) => (
-            <div key={destination.id} className="bg-white rounded-xl shadow-lg overflow-hidden  hover:shadow-[0_0_32px_8px_rgba(16,185,129,0.3)] transition-all duration-300 hover:transform hover:-translate-y-2">
+            <div key={destination.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl  transition-all duration-300 hover:transform hover:-translate-y-2 cursor-pointer" onClick={() => setSelected(destination)}>
               <div className="relative h-64 overflow-hidden">
                 <img 
                   src={destination.image} 
@@ -167,6 +190,26 @@ const Destinations = () => {
           </button>
         </div>
       </div>
+      {/* Destination Detail Modal */}
+      {selected && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="relative bg-white/90 rounded-2xl shadow-2xl w-full max-w-2xl mx-auto my-8 md:my-16 flex flex-col overflow-hidden h-[90vh] md:h-[80vh]">
+            <button onClick={() => setSelected(null)} className="absolute top-3 right-3 bg-emerald-600 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg hover:bg-emerald-700 transition z-10">&times;</button>
+            <img src={selected.image} alt={selected.name} className="w-full h-56 md:h-72 object-cover" />
+            <div className="flex-1 flex flex-col justify-start items-center px-4 py-6 overflow-y-auto w-full">
+              <h3 className="text-2xl md:text-3xl font-bold text-emerald-700 mb-2 text-center">{selected.name}</h3>
+              <p className="text-gray-700 text-center mb-3 text-base md:text-lg">{selected.description}</p>
+              <p className="text-gray-600 text-sm md:text-base mb-2 text-center">This destination offers a unique blend of natural beauty and cultural heritage, making it a must-visit for travelers seeking both relaxation and adventure. From scenic landscapes to vibrant local traditions, every moment here promises a memorable experience.</p>
+              <p className="text-gray-600 text-sm md:text-base mb-4 text-center">Whether you're exploring the lush greenery, enjoying local cuisine, or participating in traditional festivals, you'll find countless opportunities to immerse yourself in the charm and hospitality of this remarkable place.</p>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <span className="text-sm text-gray-500">{selected.district}</span>
+                <span className="text-yellow-500">★ {selected.rating}</span>
+              </div>
+              <button onClick={() => window.open(`https://wa.me/918075438808?text=${encodeURIComponent(`Hi! I'm interested in ${selected.name}. Please share more details.`)}`,'_blank')} className="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-semibold shadow-lg transition">Enquire Now</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

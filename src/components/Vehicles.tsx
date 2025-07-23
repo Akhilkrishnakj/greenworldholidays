@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Car, Users, Fuel, Shield, Star, Filter } from 'lucide-react';
+import  { useState } from 'react';
+import { Car, Users, Fuel, Shield, Star, } from 'lucide-react';
 
 const handleBookVehicle = (vehicleName: string) => {
   const message = `Hi! I'm interested in booking the ${vehicleName}. Could you please provide more details about availability and pricing?`;
@@ -160,6 +160,54 @@ const Vehicles = () => {
         bags: 3
       },
       rating: 4.5
+    },
+    {
+      id: 110,
+      name: 'Maruti Dzire',
+      category: 'Sedan',
+      image: '/etios.jpeg', // Use etios image as placeholder, or replace with '/dzire.jpeg' if available
+      price: '₹1,700',
+      period: 'per day',
+      features: ['5 Seats', 'Manual', 'AC', 'Economy'],
+      specs: {
+        fuel: 'Petrol',
+        transmission: 'Manual',
+        seats: 5,
+        bags: 3
+      },
+      rating: 4.4
+    },
+    {
+      id: 111,
+      name: 'Glider Bus',
+      category: 'Bus',
+      image: '/scania bus.webp', // Use scania bus image as placeholder, or replace with '/glider bus.jpeg' if available
+      price: '₹11,000',
+      period: 'per day',
+      features: ['40+ Seats', 'AC', 'Luxury', 'Comfort'],
+      specs: {
+        fuel: 'Diesel',
+        transmission: 'Manual',
+        seats: 40,
+        bags: 40
+      },
+      rating: 4.8
+    },
+    {
+      id: 112,
+      name: 'Toyota Hycross',
+      category: 'MPV',
+      image: '/crysta.jpeg', // Use crysta image as placeholder, or replace with '/hycross.jpeg' if available
+      price: '₹3,200',
+      period: 'per day',
+      features: ['7 Seats', 'Automatic', 'AC', 'Premium'],
+      specs: {
+        fuel: 'Petrol',
+        transmission: 'Automatic',
+        seats: 7,
+        bags: 4
+      },
+      rating: 4.7
     }
   ];
 
@@ -200,7 +248,7 @@ const Vehicles = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
           {filteredVehicles.map((vehicle) => (
-            <div key={vehicle.id} className="bg-white rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-[0_0_32px_8px_rgba(16,185,129,0.3)] transition-all duration-300 overflow-hidden group">
+            <div key={vehicle.id} className="bg-white rounded-2xl shadow-lg hover:shadow-2xl  transition-all duration-300 overflow-hidden group">
               <div className="relative overflow-hidden">
                 <img
                   src={vehicle.image}
