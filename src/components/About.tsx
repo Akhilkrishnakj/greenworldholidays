@@ -1,12 +1,63 @@
-import React from 'react';
-import { Leaf, Users, Award, Heart, Quote, Star, MapPin, Phone, Car } from 'lucide-react';
+import  { useEffect, useRef, useState } from 'react';
+import { Leaf, Users, Award, Heart, Star, MapPin, Phone, Car } from 'lucide-react';
+
+// ✅ Custom Hook for CountUp
+function useCountUp(target: number, duration: number, start: boolean, suffix = '') {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!start) return;
+
+    let startTimestamp: number | null = null;
+    let frame: number;
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      setCount(Math.floor(progress * target));
+      if (progress < 1) {
+        frame = requestAnimationFrame(step);
+      } else {
+        setCount(target);
+      }
+    };
+
+    frame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame);
+  }, [target, duration, start]);
+
+  return suffix ? `${count}${suffix}` : count;
+}
 
 const About = () => {
+  // ✅ Track if stats section is in view
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [statsInView, setStatsInView] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!statsRef.current) return;
+      const rect = statsRef.current.getBoundingClientRect();
+      if (!statsInView && rect.top < window.innerHeight && rect.bottom > 0) {
+        setStatsInView(true);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // check on mount
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [statsInView]);
+
+  // ✅ Animated counters
+  const customersCount = useCountUp(10000, 1200, statsInView, '+');
+  const vehiclesCount = useCountUp(100, 1000, statsInView, '+');
+  const yearsCount = useCountUp(20, 1000, statsInView, '+');
+  const satisfactionCount = useCountUp(98, 1000, statsInView, '%');
+
   const stats = [
-    { icon: Users, number: '10K+', label: 'Happy Customers' },
-    { icon: Car, number: '100+', label: 'Vehicles Available' },
-    { icon: Award, number: '20+', label: 'Years Experience' },
-    { icon: Heart, number: '98%', label: 'Customer Satisfaction' }
+    { icon: Users, number: customersCount, label: 'Happy Customers' },
+    { icon: Car, number: vehiclesCount, label: 'Vehicles Available' },
+    { icon: Award, number: yearsCount, label: 'Years Experience' },
+    { icon: Heart, number: satisfactionCount, label: 'Customer Satisfaction' },
   ];
 
   const features = [
@@ -29,17 +80,17 @@ const About = () => {
 
   return (
     <section id="about" className="relative overflow-hidden">
-      {/* Green Gradient Background */}
+      {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50"></div>
       <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-green-500/5 to-teal-500/5"></div>
-      
+
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-emerald-200/20 to-green-300/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-teal-200/20 to-emerald-300/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
 
       <div className="relative py-12 sm:py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Header Section */}
           <div className="text-center mb-12 lg:mb-20">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full mb-6 shadow-lg">
@@ -54,21 +105,13 @@ const About = () => {
             </p>
           </div>
 
-          {/* Company Motive Section */}
+          {/* Motive Section */}
           <div className="mb-16 lg:mb-24">
             <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 sm:p-12 lg:p-16 shadow-2xl border border-emerald-100/50 relative overflow-hidden">
-              {/* Decorative Quote Background */}
-              <div className="absolute top-4 left-4 opacity-10">
-                <Quote className="w-16 h-16 sm:w-24 sm:h-24 text-emerald-600" />
-              </div>
-              <div className="absolute bottom-4 right-4 opacity-10 rotate-180">
-                <Quote className="w-16 h-16 sm:w-24 sm:h-24 text-emerald-600" />
-              </div>
-              
               <div className="relative z-10 text-center">
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-8">Our Mission & Promise</h3>
                 <blockquote className="text-lg sm:text-xl lg:text-2xl text-gray-700 leading-relaxed italic font-medium max-w-5xl mx-auto">
-                  "To provide better tour experiences that create lifelong connections. When you and your family depart, it will be a lifelong touch with us. From your experience, you will automatically recommend your friends & relatives to us. We assure that we will fulfill your dreams and make every moment with us truly memorable."
+                  "To provide better tour reports, when you & your family depart it will be a lifelong touch with us. From your experience you will automatically recommend your friends & relatives to us. We assure that we will fulfill your dreams and the moments with us."
                 </blockquote>
                 <div className="mt-8 flex justify-center">
                   <div className="flex items-center space-x-2 text-emerald-600">
@@ -81,25 +124,24 @@ const About = () => {
             </div>
           </div>
 
-          {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16 lg:mb-24">
-            
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 leading-tight">
-                  Complete Travel Solutions for 
-                  <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent"> Kerala</span>
-                </h3>
-                <p className="text-gray-700 text-base lg:text-lg leading-relaxed mb-6">
-                  At Green World Holidays, we provide comprehensive travel solutions combining the best holiday experiences with reliable car rental services. Whether you're planning a family vacation or need a vehicle for business travel, we've got you covered.
-                </p>
-                <p className="text-gray-700 text-base lg:text-lg leading-relaxed">
-                  Our experienced team ensures seamless service delivery, from curating perfect travel itineraries to maintaining a modern fleet of well-serviced vehicles. We're committed to making your travel experience smooth, safe, and memorable.
-                </p>
-              </div>
+          {/* Service Definition Section */}
+          <div className="mb-16 lg:mb-24 max-w-4xl mx-auto text-center">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 leading-tight">
+              Complete Travel Solutions for
+              <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent"> Kerala</span>
+            </h3>
+            <p className="text-gray-700 text-base lg:text-lg leading-relaxed mb-6">
+              At Green World Holidays, we provide comprehensive travel solutions combining the best holiday experiences with reliable car rental services. Whether you're planning a family vacation or need a vehicle for business travel, we've got you covered.
+            </p>
+            <p className="text-gray-700 text-base lg:text-lg leading-relaxed">
+              Our experienced team ensures seamless service delivery, from curating perfect travel itineraries to maintaining a modern fleet of well-serviced vehicles. We're committed to making your travel experience smooth, safe, and memorable.
+            </p>
+          </div>
 
-              {/* Features Grid */}
+          {/* Features and MD Photo Section */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16 lg:mb-24">
+            {/* Features Grid */}
+            <div className="space-y-8">
               <div className="grid sm:grid-cols-1 gap-6">
                 {features.map((feature, index) => (
                   <div key={index} className="flex items-start space-x-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-emerald-100/50 hover:shadow-lg transition-all duration-300 hover:scale-105">
@@ -114,59 +156,43 @@ const About = () => {
                 ))}
               </div>
             </div>
-            
-            {/* Right Content - Founder Image */}
-            <div className="relative flex flex-col items-center justify-center">
-              <div className="relative group">
-                {/* Decorative Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-green-600 rounded-3xl transform rotate-6 group-hover:rotate-3 transition-transform duration-500"></div>
-                <div className="absolute inset-0 bg-gradient-to-tl from-teal-400 to-emerald-500 rounded-3xl transform -rotate-3 group-hover:rotate-0 transition-transform duration-500"></div>
-                
-                {/* Main Image */}
-                <div className="relative bg-white p-3 rounded-3xl shadow-2xl">
-                  <img 
-                    src="/Jayan.jpg" 
-                    alt="Founder Jayan - Green World Holidays" 
-                    className="rounded-2xl w-64 h-80 sm:w-80 sm:h-96 lg:w-72 lg:h-96 xl:w-80 xl:h-[28rem] object-cover object-center shadow-xl transition-all duration-500 group-hover:scale-105"
-                  />
-                </div>
-                
-                {/* Floating Badge */}
-                <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-2xl border-4 border-emerald-100">
-                  <div className="text-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <Award className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="text-xs font-bold text-gray-800">20+ Years</div>
-                    <div className="text-xs text-gray-600">Experience</div>
-                  </div>
-                </div>
+            {/* MD Photo and Info */}
+            <div className="flex flex-col items-center justify-center">
+              <div className="relative group mb-6">
+                <div className="absolute inset-0 rounded-2xl group-hover:shadow-[0_0_32px_8px_rgba(16,185,129,0.3)] transition-all duration-300" style={{ boxShadow: '0 0 16px 4px rgba(16,185,129,0.15)' }}></div>
+                <img
+                  src="/Jayan.jpg"
+                  alt="Managing Director Jayan - Green World Holidays"
+                  className="rounded-2xl w-56 h-56 object-cover object-center shadow-xl border-4 border-white group-hover:shadow-[0_0_32px_8px_rgba(16,185,129,0.3)] transition-all duration-300"
+                  style={{ aspectRatio: '1/1' }}
+                />
               </div>
-              
-              {/* Founder Info */}
-              <div className="mt-8 text-center bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-emerald-100/50">
-                <h4 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-emerald-700 to-green-600 bg-clip-text text-transparent mb-2">
-                  Managing Director
-                </h4>
-                <p className="text-gray-600 font-medium">Green World Holidays & Car Rentals</p>
-                <div className="flex justify-center mt-4 space-x-4">
-                  <div className="flex items-center space-x-2 text-emerald-600">
-                    <Phone className="w-4 h-4" />
-                    <span className="text-sm font-medium">+91 807 543 8808</span>
-                  </div>
+              <div className="text-center">
+                <h4 className="text-lg font-bold text-gray-900 mb-1">Jayan</h4>
+                <div className="font-semibold text-emerald-700 mb-1">Managing Director</div>
+                <div className="text-gray-600 text-sm mb-1">Green World Holidays & Car Rentals</div>
+                <div className="flex justify-center items-center space-x-2 text-emerald-600 mt-2">
+                  <Phone className="w-4 h-4" />
+                  <span className="text-sm font-medium">+91 807 543 8808</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Stats Section */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-2xl border border-emerald-100/50">
+          <div
+            ref={statsRef}
+            className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-2xl border border-emerald-100/50"
+          >
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-gray-800 mb-12">
               Our <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">Achievements</span>
             </h3>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
               {stats.map((stat, index) => (
-                <div key={index} className="text-center group hover:scale-110 transition-all duration-300">
+                <div
+                  key={index}
+                  className="text-center group hover:scale-110 transition-all duration-300"
+                >
                   <div className="bg-gradient-to-br from-emerald-500 to-green-600 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:shadow-2xl group-hover:shadow-emerald-500/25 transition-all duration-300">
                     <stat.icon className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-white" />
                   </div>
@@ -189,14 +215,14 @@ const About = () => {
                 Let us create unforgettable memories for you and your family. Contact us today to plan your perfect Kerala experience.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a 
+                <a
                   href="tel:+918075438808"
                   className="bg-white text-emerald-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg flex items-center space-x-2"
                 >
                   <Phone className="w-5 h-5" />
                   <span>Call Now</span>
                 </a>
-                <a 
+                <a
                   href="https://wa.me/918075438808"
                   className="bg-emerald-800 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-emerald-900 transition-all duration-300 hover:scale-105 shadow-lg flex items-center space-x-2"
                 >
@@ -206,6 +232,7 @@ const About = () => {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
