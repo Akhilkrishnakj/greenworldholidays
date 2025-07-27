@@ -89,7 +89,7 @@ const About = () => {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-teal-200/20 to-emerald-300/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
 
       <div className="relative py-12 sm:py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header Section */}
           <div className="text-center mb-12 lg:mb-20">
@@ -98,12 +98,12 @@ const About = () => {
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-emerald-700 via-green-600 to-teal-600 bg-clip-text text-transparent mb-6 leading-tight">
               About Green World Holidays
-            </h2>
+          </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-green-600 mx-auto mb-6"></div>
             <p className="text-lg sm:text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium">
               Your Complete Travel Partner for Unforgettable Kerala Experiences
-            </p>
-          </div>
+          </p>
+        </div>
 
           {/* Motive Section */}
           <div className="mb-16 lg:mb-24">
@@ -137,7 +137,7 @@ const About = () => {
               Our experienced team ensures seamless service delivery, from curating perfect travel itineraries to maintaining a modern fleet of well-serviced vehicles. We're committed to making your travel experience smooth, safe, and memorable.
             </p>
           </div>
-
+          
           {/* Features and MD Photo Section */}
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16 lg:mb-24">
             {/* Features Grid */}
@@ -158,13 +158,17 @@ const About = () => {
             </div>
             {/* MD Photo and Info */}
             <div className="flex flex-col items-center justify-center">
-              <div className="relative group mb-6">
-                <div className="absolute inset-0 rounded-2xl group-hover:shadow-[0_0_32px_8px_rgba(16,185,129,0.3)] transition-all duration-300" style={{ boxShadow: '0 0 16px 4px rgba(16,185,129,0.15)' }}></div>
+              <div className="relative group mb-6 flex items-center justify-center">
+                {/* 3D Decorative Background */}
+                <div className="absolute -inset-6 z-0">
+                  <div className="w-full h-full rounded-3xl bg-gradient-to-br from-emerald-200 via-green-100 to-teal-200 blur-2xl opacity-80 shadow-2xl" style={{ filter: 'blur(32px)' }}></div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-60 h-60 rounded-full bg-gradient-to-tr from-emerald-400/40 via-green-300/30 to-teal-300/40 shadow-emerald-200/40 shadow-2xl" style={{ zIndex: 1 }}></div>
+                </div>
                 <img
                   src="/Jayan.jpg"
                   alt="Managing Director Jayan - Green World Holidays"
-                  className="rounded-2xl w-56 h-56 object-cover object-center shadow-xl border-4 border-white group-hover:shadow-[0_0_32px_8px_rgba(16,185,129,0.3)] transition-all duration-300"
-                  style={{ aspectRatio: '1/1' }}
+                  className="relative z-10 rounded-2xl object-cover object-center shadow-xl border-4 border-white group-hover:shadow-[0_0_32px_8px_rgba(16,185,129,0.3)] transition-all duration-300"
+                  style={{ width: '8cm', height: '8cm', aspectRatio: '1/1', minWidth: 180, minHeight: 180, maxWidth: 320, maxHeight: 320 }}
                 />
               </div>
               <div className="text-center">
@@ -204,8 +208,8 @@ const About = () => {
                   </div>
                 </div>
               ))}
-            </div>
           </div>
+        </div>
 
           {/* Contact CTA */}
           <div className="mt-16 lg:mt-24 text-center">
