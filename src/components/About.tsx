@@ -252,7 +252,7 @@ const About = () => {
                         <img
                           src="/Jayan.jpg"
                           alt="Managing Director Jayan - Green World Holidays"
-                          className="w-36 h-46 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-3xl object-cover object-center shadow-lg bg-white"
+                          className="w-48 h-60 sm:w-56 sm:h-64 lg:w-64 lg:h-72 rounded-3xl object-cover object-center shadow-lg bg-white"
                           style={{ background: 'transparent' }}
                         />
                       </div>
@@ -265,17 +265,6 @@ const About = () => {
                         <div className="text-emerald-700 font-semibold text-sm tracking-wide uppercase">Managing Director & Founder</div>
                         <div className="text-gray-600 text-sm font-light">Green World Holidays & Car Rentals</div>
                       </div>
-                      
-                      {/* Premium Contact Button */}
-                      <a
-                        href="tel:+918075438808"
-                        className="inline-flex items-center space-x-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-white/20 backdrop-blur-sm group"
-                      >
-                        <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors duration-300">
-                          <Phone className="w-4 h-4" />
-                        </div>
-                        <span className="tracking-wide">+91 807 543 8808</span>
-                      </a>
                     </div>
                   </div>
                 </div>
