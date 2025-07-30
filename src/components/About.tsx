@@ -252,7 +252,7 @@ const About = () => {
                         <img
                           src="/Jayan.jpg"
                           alt="Managing Director Jayan - Green World Holidays"
-                          className="w-36 h-36 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-3xl object-cover object-center shadow-lg bg-white"
+                          className="w-36 h-46 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-3xl object-cover object-center shadow-lg bg-white"
                           style={{ background: 'transparent' }}
                         />
                       </div>
@@ -261,7 +261,7 @@ const About = () => {
                     {/* Enhanced Professional Info */}
                     <div className="text-center space-y-4">
                       <div className="space-y-2">
-                        <h4 className="text-2xl font-bold text-gray-900">Jayan</h4>
+                        <h4 className="text-2xl font-bold text-gray-900">Jayakumar K R</h4>
                         <div className="text-emerald-700 font-semibold text-sm tracking-wide uppercase">Managing Director & Founder</div>
                         <div className="text-gray-600 text-sm font-light">Green World Holidays & Car Rentals</div>
                       </div>
