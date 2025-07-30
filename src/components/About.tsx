@@ -48,7 +48,7 @@ const About = () => {
   }, [statsInView]);
 
   // ✅ Animated counters
-  const customersCount = useCountUp(10000, 1200, statsInView, '+');
+    const customersCount = useCountUp(10, 1200, statsInView, 'K+');
   const vehiclesCount = useCountUp(100, 1000, statsInView, '+');
   const yearsCount = useCountUp(20, 1000, statsInView, '+');
   const satisfactionCount = useCountUp(98, 1000, statsInView, '%');
