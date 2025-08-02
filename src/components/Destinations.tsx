@@ -75,7 +75,7 @@ const Destinations = () => {
       id: 7,
       name: 'Kanyakumari - Land’s End',
       district: 'Kanyakumari',
-      image: '/kovala beach.jpg', // Use Kovalam beach as a placeholder if no Kanyakumari image
+      image: '/kanyakumari.jpg', // Use Kovalam beach as a placeholder if no Kanyakumari image
       rating: 4.8,
       description: 'Marvel at the confluence of three seas, iconic Vivekananda Rock, sunrise and sunset views, and the southernmost tip of India.'
     },
@@ -91,7 +91,7 @@ const Destinations = () => {
       id: 9,
       name: 'Wayanad - Green Paradise',
       district: 'Wayanad',
-      image: '/vagamon.jpg', // Use vagamon as a placeholder if no Wayanad image
+      image: '/wayanad.jpg', // Use vagamon as a placeholder if no Wayanad image
       rating: 4.9,
       description: 'Discover misty mountains, lush forests, wildlife sanctuaries, waterfalls, and the cool climate of Wayanad.'
     },
@@ -99,7 +99,7 @@ const Destinations = () => {
       id: 10,
       name: 'Bekal Fort (Bakel Kotta)',
       district: 'Kasaragod',
-      image: '/fort kochi.webp', // Placeholder, update if Bekal Fort image is available
+      image: '/bekal-fort.jpg', // Placeholder, update if Bekal Fort image is available
       rating: 4.8,
       description: 'Step into history at Bekal Fort, Kerala’s largest and best-preserved fort, offering panoramic views of the Arabian Sea and lush surroundings.'
     },
@@ -107,7 +107,7 @@ const Destinations = () => {
       id: 11,
       name: 'Kumarakom',
       district: 'Kottayam',
-      image: '/Alappuzha-Backwaters & Houseboat.jpg', // Placeholder, update if Kumarakom image is available
+      image: '/kumarakam.webp', // Placeholder, update if Kumarakom image is available
       rating: 4.7,
       description: 'Unwind in the tranquil backwaters of Kumarakom, famous for its bird sanctuary, houseboat cruises, and lush green landscapes.'
     },

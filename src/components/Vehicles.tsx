@@ -181,7 +181,7 @@ const Vehicles = () => {
       id: 111,
       name: 'Glider Bus',
       category: 'Bus',
-      image: '/scania bus.webp', // Use scania bus image as placeholder, or replace with '/glider bus.jpeg' if available
+      image: '/glider.webp', // Use scania bus image as placeholder, or replace with '/glider bus.jpeg' if available
       price: '₹11,000',
       period: 'per day',
       features: ['40+ Seats', 'AC', 'Luxury', 'Comfort'],

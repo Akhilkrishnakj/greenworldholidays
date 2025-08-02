@@ -33,7 +33,7 @@ const Navbar = () => {
             <img 
               src="/green%20world.png" 
               alt="Green World Holidays" 
-              className="h-14 sm:h-14 lg:h-16 w-auto drop-shadow-md"
+              className="h-16 sm:h-14 lg:h-16 w-auto drop-shadow-md"
             />
           </div>
           
